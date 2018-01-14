@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.List;
 
 import productions.darthplagueis.testingsqlite.model.Fellow;
+import productions.darthplagueis.testingsqlite.model.LaptopSighting;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
 
         for(Fellow f : fellows) {
             Log.d("Fellows? ", f.getFirstName() + " " + f.getLastName() + " - " + f.getCompany());
+        }
+
+        LaptopSightingDatabaseHelper databaseHelper = new LaptopSightingDatabaseHelper(getApplicationContext());
+
+        databaseHelper.addSighting(new LaptopSighting("palpatine", "macbook", 1, 1, "ISD", 0, 36));
+
+        List<LaptopSighting> sightings = databaseHelper.getSightingList();
+
+        for (LaptopSighting s : sightings) {
+            Log.d("Laptop Sightings", s.getName() + " " + s.getTimeStamp());
         }
     }
 }
